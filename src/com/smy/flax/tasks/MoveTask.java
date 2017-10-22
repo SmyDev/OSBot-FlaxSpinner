@@ -31,6 +31,7 @@ public class MoveTask extends Task{
 		if(!api.inventory.contains("Flax")
 				&& !BANK_AREA.contains(api.myPlayer()))
 		{
+			Utils.isSpinning = false;
 			api.walking.webWalk(BANK_AREA);
 			return;
 		}
@@ -39,6 +40,7 @@ public class MoveTask extends Task{
 				&& api.inventory.contains("Flax")
 				&& !SPIN_AREA.contains(api.myPlayer()))
 		{
+			Utils.isSpinning = false;
 			api.walking.webWalk(SPIN_AREA);
 			return;
 		}

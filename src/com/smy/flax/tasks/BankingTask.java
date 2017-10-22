@@ -34,6 +34,8 @@ public class BankingTask extends Task{
 		Entity bank = api.objects.closest("Bank booth");
 		
 		if(bank == null) return;
+
+		Utils.isSpinning = false;
 		
 		api.bank.open();
 		

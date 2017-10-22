@@ -6,4 +6,5 @@ public class Utils {
 	
 	public static boolean stopScript = false;
 	public static boolean mule = false;
+	public static boolean isSpinning = false;
 }

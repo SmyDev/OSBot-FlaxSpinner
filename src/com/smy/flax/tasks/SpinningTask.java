@@ -46,8 +46,10 @@ public class SpinningTask extends Task{
 			
 			RS2Widget inter = api.getWidgets().get(270, 14, 38);
 			
-			if(inter != null)
+			if(inter != null){
 				inter.interact("Make");
+				Utils.isSpinning = true;
+			}
 		}
 	}
 }

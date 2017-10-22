@@ -3,6 +3,8 @@ package com.smy.flax;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+
+import com.smy.flax.tasks.AntiBanTask;
 import org.osbot.rs07.api.ui.Skill;
 import org.osbot.rs07.script.Script;
 import org.osbot.rs07.script.ScriptManifest;
@@ -13,9 +15,9 @@ import com.smy.flax.tasks.SpinningTask;
 
 @ScriptManifest(author = "benas512", info = "Flax Spinner", logo = "", name = "Flax Spinner", version = 1.0)
 public class Flax extends Script{
-	
-	private ArrayList<Task> task = new ArrayList<Task>();
-	
+
+	private ArrayList<Task> task = new ArrayList<>();
+
 	private boolean canStart;
 	
 	@Override
@@ -26,6 +28,7 @@ public class Flax extends Script{
 		task.add(new BankingTask(this));
 		task.add(new MoveTask(this));
 		task.add(new SpinningTask(this));
+		task.add(new AntiBanTask(this));
 		
 		Utils.currentXp = getSkills().getExperience(Skill.CRAFTING);
 	}
