@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="Flax:jar">
+    <output-path>$USER_HOME$/OSBot/Scripts</output-path>
+    <root id="root">
+      <element id="archive" name="Flax Spinner.jar">
+        <element id="module-output" name="Flax Spinner" />
+      </element>
+    </root>
+  </artifact>
+</component>
