@@ -7,6 +7,7 @@ import org.osbot.rs07.script.MethodProvider;
 
 import com.smy.flax.Task;
 import com.smy.flax.Utils;
+import org.osbot.rs07.utility.ConditionalSleep;
 
 public class BankingTask extends Task{
 	
@@ -37,11 +38,14 @@ public class BankingTask extends Task{
 
 		Utils.isSpinning = false;
 		
-		api.bank.open();
-		
-		api.sleep(api.random(896, 1357));
-		
-		if(api.bank.isOpen()) {
+		if(api.bank.open()){
+			new ConditionalSleep(MethodProvider.random(700, 1400)){
+				@Override
+				public boolean condition() throws InterruptedException {
+					return api.bank.isOpen();
+				}
+			}.sleep();
+
 			Anti_Pattern_Deposit();
 			Take_Items();
 			Close_Bank();
@@ -57,16 +61,37 @@ public class BankingTask extends Task{
 		int rnd = api.random(0, 100);
 		
 		if(rnd > 10) {
-			api.bank.depositAll();
+			if(api.bank.depositAll()){
+				new ConditionalSleep(1000){
+					@Override
+					public boolean condition() throws InterruptedException {
+						return api.inventory.isEmpty();
+					}
+				}.sleep();
+			}
 		} else {
-			api.bank.depositAll("Bow string");
+			if(api.bank.depositAll("Bow string")){
+				new ConditionalSleep(1000){
+					@Override
+					public boolean condition() throws InterruptedException {
+						return !api.inventory.contains("Bow string");
+					}
+				}.sleep();
+			}
 		}
 	}
 	
 	private void Take_Items()
 	{
 		if(api.getBank().contains("Flax")) {
-			api.getBank().withdraw("Flax", 28);
+			if(api.getBank().withdraw("Flax", 28)){
+				new ConditionalSleep(1000){
+					@Override
+					public boolean condition() throws InterruptedException {
+						return api.inventory.contains("Flax");
+					}
+				}.sleep();
+			}
 		} else {
 			Utils.stopScript = true;
 		}
