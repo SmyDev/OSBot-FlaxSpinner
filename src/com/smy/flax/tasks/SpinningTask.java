@@ -29,33 +29,32 @@ public class SpinningTask extends Task{
 		return false;
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
 	public void process() throws InterruptedException {
 		RS2Object wheel = api.objects.closest(14889);
 		
 		if(api.map.canReach(wheel)){
 			
-			api.getInventory().interact("Use", "Flax");
-			
-			if(api.inventory.isItemSelected())
+			if(api.getInventory().interact("Use", "Flax"))
 			{
+				new ConditionalSleep(1500){
+					@Override
+					public boolean condition() throws InterruptedException {
+						return api.inventory.isItemSelected();
+					}
+				}.sleep();
+
 				wheel.interact("Use");
-				
-				api.sleep(api.random(1000, 1500));
+
+				MethodProvider.sleep(MethodProvider.random(1000, 1500));
 			}
 			
 			RS2Widget inter = api.getWidgets().get(270, 14, 38);
 
-			new ConditionalSleep(2000){
-				@Override
-				public boolean condition() throws InterruptedException {
-					return inter != null;
-				}
-			}.sleep();
-
-			inter.interact("Make");
-			Utils.isSpinning = true;
+			if(inter != null){
+				inter.interact("Make");
+				Utils.isSpinning = true;
+			}
 		}
 	}
 }
