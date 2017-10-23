@@ -8,6 +8,7 @@ import org.osbot.rs07.script.MethodProvider;
 
 import com.smy.flax.Task;
 import com.smy.flax.Utils;
+import org.osbot.rs07.utility.ConditionalSleep;
 
 public class SpinningTask extends Task{
 	
@@ -41,15 +42,20 @@ public class SpinningTask extends Task{
 			{
 				wheel.interact("Use");
 				
-				api.sleep(api.random(1036, 1534));
+				api.sleep(api.random(1000, 1500));
 			}
 			
 			RS2Widget inter = api.getWidgets().get(270, 14, 38);
-			
-			if(inter != null){
-				inter.interact("Make");
-				Utils.isSpinning = true;
-			}
+
+			new ConditionalSleep(2000){
+				@Override
+				public boolean condition() throws InterruptedException {
+					return inter != null;
+				}
+			}.sleep();
+
+			inter.interact("Make");
+			Utils.isSpinning = true;
 		}
 	}
 }
