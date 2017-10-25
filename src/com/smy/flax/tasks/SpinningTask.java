@@ -46,7 +46,7 @@ public class SpinningTask extends Task{
 
 				wheel.interact("Use");
 
-				MethodProvider.sleep(MethodProvider.random(1000, 1500));
+				MethodProvider.sleep(MethodProvider.random(1500, 2000));
 			}
 			
 			RS2Widget inter = api.getWidgets().get(270, 14, 38);
@@ -54,6 +54,7 @@ public class SpinningTask extends Task{
 			if(inter != null){
 				inter.interact("Make");
 				Utils.isSpinning = true;
+				MethodProvider.sleep(MethodProvider.random(800, 1400));
 			}
 		}
 	}
