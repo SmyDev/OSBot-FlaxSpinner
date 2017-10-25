@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.smy.flax.tasks.AntiBanTask;
+import org.osbot.rs07.api.map.Area;
 import org.osbot.rs07.api.ui.Skill;
 import org.osbot.rs07.script.Script;
 import org.osbot.rs07.script.ScriptManifest;
@@ -16,6 +17,7 @@ import com.smy.flax.tasks.MoveTask;
 import com.smy.flax.tasks.SpinningTask;
 
 import javax.imageio.ImageIO;
+import javax.rmi.CORBA.Util;
 
 @ScriptManifest(author = "benas512", info = "Flax Spinner", logo = "", name = "Flax Spinner", version = 1.0)
 public class Flax extends Script{
@@ -43,10 +45,20 @@ public class Flax extends Script{
 	@Override
 	public int onLoop() throws InterruptedException
 	{
-		if(Utils.stopScript)	 /*It's only for GUI, because sometimes Utils.canStart might be false*/
-			stop(true);
+		if(Utils.stopScript){		/*It's only for GUI, because sometimes Utils.canStart might be false*/
+			switch (Utils.onFinish){
+				case 0: 	/*Log out*/
+					stop(true);
+					break;
+				case 1:		/*Go to ge*/
+					Area ge = new Area(3161, 3487, 3168, 3483);
+					walking.webWalk(ge);
+					stop(true);
+					break;
+			}
+		}
 
-		if(Utils.canStart)
+		if(Utils.canStart && !Utils.stopScript)
 		{
 			Utils.latestXp = getSkills().getExperience(Skill.CRAFTING);
 			if(Utils.latestXp > Utils.currentXp)
@@ -57,8 +69,6 @@ public class Flax extends Script{
 			}
 			for(Task t : task)
 			{
-				if(Utils.stopScript)
-					stop(true);
 				t.run();
 			}
 		}
@@ -86,7 +96,7 @@ public class Flax extends Script{
 		/****************/
 
 		/*Info draw*/
-		int hours = (int)((System.currentTimeMillis() - Utils.startTime) / (1000*60)) % 60;
+		int hours = (int)(( System.currentTimeMillis() - Utils.startTime) / (1000*60*60)) % 24;
 		int minutes = (int)((System.currentTimeMillis() - Utils.startTime) / (1000*60)) % 60;
 		int seconds = (int)((System.currentTimeMillis() - Utils.startTime) / 1000) % 60;
 		g.setColor(Color.white);
