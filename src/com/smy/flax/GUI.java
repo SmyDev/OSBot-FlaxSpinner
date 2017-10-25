@@ -32,6 +32,7 @@ public class GUI extends JFrame{
         radiobutt_logout = new JRadioButton("Log out after finish");
         radiobutt_logout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Utils.onFinish = 0;
                 if(radiobutt_ge.isEnabled())
                     radiobutt_ge.setEnabled(false);
                 else
@@ -44,6 +45,7 @@ public class GUI extends JFrame{
         radiobutt_ge = new JRadioButton("Go to GE after finish");
         radiobutt_ge.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                Utils.onFinish = 1;
                 if(radiobutt_logout.isEnabled())
                     radiobutt_logout.setEnabled(false);
                 else
@@ -56,6 +58,7 @@ public class GUI extends JFrame{
         button_start = new JButton("Start");
         button_start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                setVisible(false);
                 Utils.canStart = true;
                 Utils.startTime = System.currentTimeMillis();
             }
