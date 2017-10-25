@@ -8,4 +8,6 @@ public class Utils {
 	public static boolean mule = false;
 	public static boolean isSpinning = false;
 	public static boolean canStart = false;
+
+	public static int onFinish = 0;		/*0 - Log out, 1 - Go to GE*/
 }
