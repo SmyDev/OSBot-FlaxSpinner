@@ -11,7 +11,7 @@ public class GUI extends JFrame{
 
     private JPanel contentPane;
 
-    private JRadioButton radiobutt_logout, radiobutt_ge;
+    private JCheckBox radiobutt_logout, radiobutt_ge;
     private JButton button_start;
 
     public GUI() {
@@ -29,7 +29,7 @@ public class GUI extends JFrame{
         contentPane.setLayout(null);
         setVisible(true);
 
-        radiobutt_logout = new JRadioButton("Log out after finish");
+        radiobutt_logout = new JCheckBox("Log out after finish");
         radiobutt_logout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Utils.onFinish = 0;
@@ -42,7 +42,7 @@ public class GUI extends JFrame{
         radiobutt_logout.setBounds(6, 7, 146, 23);
         contentPane.add(radiobutt_logout);
 
-        radiobutt_ge = new JRadioButton("Go to GE after finish");
+        radiobutt_ge = new JCheckBox("Go to GE after finish");
         radiobutt_ge.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 Utils.onFinish = 1;
