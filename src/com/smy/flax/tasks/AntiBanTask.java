@@ -25,7 +25,7 @@ public class AntiBanTask extends Task {
         int rnd = MethodProvider.random(0,2);
         int luck = MethodProvider.random(0, 100);
 
-        if(luck < 5){
+        if(luck < 15){
             switch(rnd){
                 case 0:     /*Move mouse out of screen*/
                     api.mouse.moveOutsideScreen();
@@ -38,27 +38,29 @@ public class AntiBanTask extends Task {
 
                     if(obj != null){
                         if(obj.isVisible()){
-                            obj.interact("Examine");
-                        } else {
-                            api.getCamera().toEntity(obj);
+                            if(obj.hasAction("Examine")){
+                                obj.interact("Examine");
+                            } else {
+                                obj.hover();
 
-                            obj.hover();
-
-                            MethodProvider.sleep(MethodProvider.random(400,900));
-
-                            api.getMouse().click(true);
-
-                            MethodProvider.sleep(MethodProvider.random(1000,2000));
-
-                            if(MethodProvider.random(0, 100) < 25){
-                                int rx = MethodProvider.random(1, api.getBot().getCanvas().getX());
-                                int ry = MethodProvider.random(1, api.getBot().getCanvas().getY());
-                                api.mouse.move(rx, ry);
+                                if(MethodProvider.random(0, 100) < 25){
+                                    int rx = MethodProvider.random(1, api.getBot().getCanvas().getX());
+                                    int ry = MethodProvider.random(1, api.getBot().getCanvas().getY());
+                                    api.mouse.move(rx, ry);
+                                }
                             }
                         }
                     }
                     break;
-                case 2:     /*Crafting skill check*/
+                case 2:     /*Move camera to objects*/
+                    List<RS2Object> objectsList = api.objects.getAll();
+                    int rightone = MethodProvider.random(0, objectsList.size());
+
+                    RS2Object objj = objectsList.get(rightone);
+
+                    if(objj != null){
+                        api.getCamera().toEntity(objj);
+                    }
 
                     break;
             }
