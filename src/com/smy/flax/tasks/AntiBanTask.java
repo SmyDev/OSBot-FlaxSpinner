@@ -44,8 +44,8 @@ public class AntiBanTask extends Task {
                                 obj.hover();
 
                                 if(MethodProvider.random(0, 100) < 25){
-                                    int rx = MethodProvider.random(1, api.getBot().getCanvas().getX());
-                                    int ry = MethodProvider.random(1, api.getBot().getCanvas().getY());
+                                    int rx = MethodProvider.random(1, 760);
+                                    int ry = MethodProvider.random(1, 500);
                                     api.mouse.move(rx, ry);
                                 }
                             }
