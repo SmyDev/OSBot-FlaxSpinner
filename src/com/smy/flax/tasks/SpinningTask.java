@@ -31,7 +31,7 @@ public class SpinningTask extends Task{
 
 	@Override
 	public void process() throws InterruptedException {
-		RS2Object wheel = api.objects.closest(14889);
+		RS2Object wheel = api.objects.closest("Spinning wheel");
 		
 		if(api.map.canReach(wheel)){
 			
@@ -46,7 +46,7 @@ public class SpinningTask extends Task{
 
 				wheel.interact("Use");
 
-				MethodProvider.sleep(MethodProvider.random(1500, 2000));
+				MethodProvider.sleep(MethodProvider.random(1400, 1600));
 			}
 			
 			RS2Widget inter = api.getWidgets().get(270, 14, 38);
